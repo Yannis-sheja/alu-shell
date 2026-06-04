@@ -1,2 +1,2 @@
 #!/bin/bash
-python3 -c $'import os\nw="water"\ns="stir"\nb="bestchol"\nW=os.environ["WATER"]\nS=os.environ["STIR"]\nd1=sum(w.index(W[i])*5**(len(W)-1-i) for i in range(len(W)))\nd2=sum(s.index(S[i])*4**(len(S)-1-i) for i in range(len(S)))\nn=d1+d2\nr=""\nexec("while n>0:\\n r=b[n%8]+r\\n n=n//8")\nprint(r)'
+python3 -c $'import os\nw="water"\ns="stir"\nb="bestchol"\nW=os.environ["WATER"]\nS=os.environ["STIR"]\nd1=sum(w.index(W[i])*5**(len(W)-1-i) for i in range(len(W)))\nd2=sum(s.index(S[i])*4**(len(S)-1-i) for i in range(len(S)))\nn=d1+d2\nr=[]\nwhile n>0:\n r=[b[n%8]]+r\n n=n//8\nprint("".join(r))'
