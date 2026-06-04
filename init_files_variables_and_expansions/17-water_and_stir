@@ -1,2 +1,2 @@
 #!/bin/bash
-echo $(awk 'BEGIN{w="water";s="stir";b="bestchol";W=ENVIRON["WATER"];S=ENVIRON["STIR"];d1=0;for(i=1;i<=length(W);i++){c=substr(W,i,1);for(j=1;j<=5;j++)if(substr(w,j,1)==c)d1=d1*5+(j-1)};d2=0;for(i=1;i<=length(S);i++){c=substr(S,i,1);for(j=1;j<=4;j++)if(substr(s,j,1)==c)d2=d2*4+(j-1)};n=d1+d2;r="";while(n>0){r=substr(b,n%8+1,1)r;n=int(n/8)};print r}')
+python3 -c $'import os\nw="water"\ns="stir"\nb="bestchol"\nW=os.environ["WATER"]\nS=os.environ["STIR"]\nd1=sum(w.index(c)*5**i for i,c in enumerate(reversed(W)))\nd2=sum(s.index(c)*4**i for i,c in enumerate(reversed(S)))\nn=d1+d2\nr=""\nexec("while n>0:\\n r=b[n%8]+r\\n n=n//8")\nprint(r)'
