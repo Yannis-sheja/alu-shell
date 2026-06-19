@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-# This script tells a story based on every user found in /etc/passwd,
-# using a while loop and the IFS field separator
-while IFS=: read -r username password userid groupid gecos home shell; do
-    echo "The user $username is part of the $groupid gang, lives in $home and rides $shell. $userid's place is protected by the passcode $password, more info about the user here: $gecos"
-done < /etc/passwd

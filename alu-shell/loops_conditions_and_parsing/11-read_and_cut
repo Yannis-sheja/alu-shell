@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-# This script displays the username, user id and home directory of every
-# user found in /etc/passwd
-while IFS=: read -r username _ userid _ _ home _; do
-    echo "$username:$userid:$home"
-done < /etc/passwd
