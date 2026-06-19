@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# This script lists the content of the current directory, displaying only
+# the part of each name found after the first dash, skipping hidden files
+for file in *; do
+    echo "${file#*-}"
+done
