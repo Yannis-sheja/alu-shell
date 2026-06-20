@@ -3,22 +3,35 @@
 PIDFILE="/var/run/my_process.pid"
 DAEMON="$(dirname "$0")/manage_my_process"
 
+start_daemon() {
+    "$DAEMON" &
+    echo "$!" > "$PIDFILE"
+}
+
+stop_daemon() {
+    local pid
+    pid="$(cat "$PIDFILE" 2>/dev/null)"
+    if [ -n "$pid" ]; then
+        kill "$pid" 2>/dev/null
+        while kill -0 "$pid" 2>/dev/null; do
+            sleep 0.1
+        done
+    fi
+    rm -f "$PIDFILE"
+}
+
 case "$1" in
     start)
-        "$DAEMON" &
-        echo "$!" > "$PIDFILE"
+        start_daemon
         echo "manage_my_process started"
         ;;
     stop)
-        kill "$(cat "$PIDFILE")"
-        rm -f "$PIDFILE"
+        stop_daemon
         echo "manage_my_process stopped"
         ;;
     restart)
-        kill "$(cat "$PIDFILE")"
-        rm -f "$PIDFILE"
-        "$DAEMON" &
-        echo "$!" > "$PIDFILE"
+        stop_daemon
+        start_daemon
         echo "manage_my_process restarted"
         ;;
     *)
